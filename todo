@@ -1,0 +1,5 @@
+#!/bin/bash
+
+SCRIPTPATH="$(realpath $0 | xargs dirname)"
+
+node $SCRIPTPATH/index.js "$@"
