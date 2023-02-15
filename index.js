@@ -1,5 +1,6 @@
 import process from "node:process"
 import add from "./src/commands/add.js"
+import edit from "./src/commands/edit.js"
 import help from "./src/commands/help.js"
 import list from "./src/commands/list.js"
 import remove from "./src/commands/remove.js"
@@ -12,6 +13,7 @@ const commands = {
   list,
   toggle,
   help,
+  edit: edit,
 }
 
 const [commandName, ...args] = process.argv.slice(2)
