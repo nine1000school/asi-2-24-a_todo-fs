@@ -1,0 +1,2 @@
+export const EXIT_INVALID_COMMAND = 1
+export const EXIT_INVALID_ARGUMENT = 2
