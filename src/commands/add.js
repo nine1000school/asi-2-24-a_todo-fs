@@ -16,10 +16,9 @@ const add = ([description]) => {
     done: false,
   }
 
-  write({
+  write(db, {
     lastId,
     todos: {
-      ...db.todos,
       [lastId]: todo,
     },
   })

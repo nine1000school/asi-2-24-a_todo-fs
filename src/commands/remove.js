@@ -7,15 +7,18 @@ import printTodo from "../utils/printTodo.js"
 const remove = ([todoId]) => {
   const db = read()
   const {
-    lastId,
-    todos: { [todoId]: todo, ...todos },
+    todos: { [todoId]: todo },
   } = db
 
   if (!todo) {
     exitWithError(`No such todo for ID #${todoId}`, EXIT_INVALID_ARGUMENT)
   }
 
-  write({ lastId, todos })
+  write(db, {
+    todos: {
+      [todoId]: undefined,
+    },
+  })
   printTodo(todo)
 }
 

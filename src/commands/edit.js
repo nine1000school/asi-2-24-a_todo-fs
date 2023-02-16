@@ -12,7 +12,7 @@ const edit = ([todoId, description]) => {
   const db = read()
   const {
     lastId,
-    todos: { [todoId]: todo, ...todos },
+    todos: { [todoId]: todo },
   } = db
 
   if (!todo) {
@@ -23,12 +23,12 @@ const edit = ([todoId, description]) => {
     ...todo,
     description,
   }
-  const updatedTodos = structuredClone(todos)
-  updatedTodos[todoId] = updatedTodo
 
   write({
     lastId,
-    todos: updatedTodos,
+    todos: {
+      [todoId]: updatedTodo,
+    },
   })
 
   printTodo(updatedTodo)

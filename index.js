@@ -13,7 +13,7 @@ const commands = {
   list,
   toggle,
   help,
-  edit: edit,
+  edit,
 }
 
 const [commandName, ...args] = process.argv.slice(2)

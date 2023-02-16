@@ -7,8 +7,7 @@ import printTodo from "../utils/printTodo.js"
 const toggle = ([todoId]) => {
   const db = read()
   const {
-    lastId,
-    todos: { [todoId]: todo, ...todos },
+    todos: { [todoId]: todo },
   } = db
 
   if (!todo) {
@@ -19,12 +18,11 @@ const toggle = ([todoId]) => {
     ...todo,
     done: !todo.done,
   }
-  const updatedTodos = structuredClone(todos)
-  updatedTodos[todoId] = updatedTodo
 
-  write({
-    lastId,
-    todos: updatedTodos,
+  write(db, {
+    todos: {
+      [todoId]: updatedTodo,
+    },
   })
 
   printTodo(updatedTodo)
