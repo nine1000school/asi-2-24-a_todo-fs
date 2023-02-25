@@ -1,25 +1,23 @@
-import { EXIT_INVALID_ARGUMENT } from "../constants.js"
 import read from "../db/read.js"
 import write from "../db/write.js"
-import exitWithError from "../utils/exitWithError.js"
 import printTodo from "../utils/printTodo.js"
 
-const remove = ([todoId]) => {
-  const db = read()
-  const {
-    todos: { [todoId]: todo },
-  } = db
+const remove = async (todoIds) => {
+  const ids = todoIds.map((x) => Number.parseInt(x, 10))
+  const db = await read()
+  const todos = Object.fromEntries(
+    Object.entries(db.todos).map(([id, todo]) => {
+      if (ids.includes(todo.id)) {
+        printTodo(todo)
 
-  if (!todo) {
-    exitWithError(`No such todo for ID #${todoId}`, EXIT_INVALID_ARGUMENT)
-  }
+        return [id]
+      }
 
-  write(db, {
-    todos: {
-      [todoId]: undefined,
-    },
-  })
-  printTodo(todo)
+      return [id, todo]
+    })
+  )
+
+  await write(db, { todos })
 }
 
 export default remove

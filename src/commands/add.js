@@ -3,12 +3,12 @@ import write from "../db/write.js"
 import exitWithError from "../utils/exitWithError.js"
 import printTodo from "../utils/printTodo.js"
 
-const add = ([description]) => {
+const add = async (description) => {
   if (!description) {
     exitWithError("Missing DESCRIPTION.", 2)
   }
 
-  const db = read()
+  const db = await read()
   const lastId = db.lastId + 1
   const todo = {
     id: lastId,
@@ -16,7 +16,7 @@ const add = ([description]) => {
     done: false,
   }
 
-  write(db, {
+  await write(db, {
     lastId,
     todos: {
       [lastId]: todo,

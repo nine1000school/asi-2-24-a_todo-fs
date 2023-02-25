@@ -10,6 +10,7 @@
     "prettier": "^2.8.4"
   },
   "dependencies": {
+    "commander": "^10.0.0",
     "deepmerge-ts": "^4.3.0"
   }
 }

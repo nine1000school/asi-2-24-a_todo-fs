@@ -4,12 +4,12 @@ import write from "../db/write.js"
 import exitWithError from "../utils/exitWithError.js"
 import printTodo from "../utils/printTodo.js"
 
-const edit = ([todoId, description]) => {
+const edit = async (todoId, description) => {
   if (!description) {
     exitWithError(`Invalid argument description`, EXIT_INVALID_ARGUMENT)
   }
 
-  const db = read()
+  const db = await read()
   const {
     lastId,
     todos: { [todoId]: todo },
@@ -24,7 +24,7 @@ const edit = ([todoId, description]) => {
     description,
   }
 
-  write({
+  await write({
     lastId,
     todos: {
       [todoId]: updatedTodo,

@@ -4,8 +4,8 @@ import write from "../db/write.js"
 import exitWithError from "../utils/exitWithError.js"
 import printTodo from "../utils/printTodo.js"
 
-const toggle = ([todoId]) => {
-  const db = read()
+const toggle = async (todoId) => {
+  const db = await read()
   const {
     todos: { [todoId]: todo },
   } = db
@@ -19,7 +19,7 @@ const toggle = ([todoId]) => {
     done: !todo.done,
   }
 
-  write(db, {
+  await write(db, {
     todos: {
       [todoId]: updatedTodo,
     },
